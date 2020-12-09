@@ -128,9 +128,6 @@ class CloudWatchForwarder:
         streams = self.get_log_streams()
         for log in self.get_logs(streams=streams):
             log = self.add_location(str(log))
-            # self.forward(host, port, log)
+            self.forward(host, port, log)
             print(log)
 
-
-
-# c = CloudWatchForwarder(acc_id='202925831767', log_group='/aws/cloudtrail/console-events', user_profile='default')
