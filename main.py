@@ -5,15 +5,10 @@ import time
 import socket
 from threading import Thread
 
-try:
-    from bundle.cloudwatch_forwarder import CloudWatchForwarder
-    from bundle.logger import logger
-    from bundle.config import conf
-except ModuleNotFoundError:
-    from cloudwatch_forwarder import CloudWatchForwarder
-    from logger import logger
-    from config_reader import conf
-    from yaml_reader import get_confs
+from bundle.cloudwatch_forwarder import CloudWatchForwarder
+from bundle.logger import logger
+from bundle.config_reader import conf
+from bundle.yaml_reader import get_confs
 
 HOST = conf.read('prod-logger-input', 'host')
 PORT = conf.read('prod-logger-input', 'port')
