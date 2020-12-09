@@ -31,11 +31,10 @@ class Logger:
         self.logger.setLevel(logging.DEBUG)
         self._formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         # file handler
-        file_handller = logging.FileHandler(os.path.join(self.filepath))
+        file_handller = logging.FileHandler(os.path.join(os.path.dirname(os.path.dirname(__file__)), self.filepath))
         file_handller.setLevel(logging.DEBUG)
         file_handller.setFormatter(self._formatter)
         self.logger.addHandler(file_handller)
 
 
-logger = Logger(os.path.abspath(conf.read('log-file', 'name'))).logger
-
+logger = Logger(conf.read('log-file', 'name')).logger
