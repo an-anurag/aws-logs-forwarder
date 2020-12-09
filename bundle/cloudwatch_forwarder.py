@@ -13,13 +13,13 @@ from geoip2.errors import AddressNotFoundError
 from bundle.yaml_reader import get_confs
 
 try:
-    from aws_logs_forwarder.config import conf
-    from aws_logs_forwarder.location_finder import LocationFinder
-    from aws_logs_forwarder.logger import logger
-except ModuleNotFoundError:
     from bundle.config_reader import conf
     from bundle.location_finder import LocationFinder
     from bundle.logger import logger
+except ModuleNotFoundError:
+    from config_reader import conf
+    from location_finder import LocationFinder
+    from logger import logger
 
 
 class CloudWatchForwarder:
@@ -31,16 +31,18 @@ class CloudWatchForwarder:
         Constructor
         """
         self.acc_id = acc_id
-        self.session = boto3.Session(profile_name=user_profile)
+        self.log_group = log_group
+        self.user_profile = user_profile
+        self.session = boto3.Session(profile_name=self.user_profile)
         self.cloudwatch = self.session.client('logs')
         self.sts = self.session.client('sts')
-        self.log_group = log_group
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.tokens = {}
         self.kwargs = {
             'logGroupName': self.log_group,
             'logStreamName': None,
         }
+        self.validated_data = []
 
     def get_account_id(self):
         """
@@ -49,12 +51,16 @@ class CloudWatchForwarder:
         return self.sts.get_caller_identity()['Account']
 
     def validate_account(self):
+        """
+        Currently unused
+        """
         try:
             account_id = self.get_account_id()
             api_call = self.cloudwatch.describe_log_groups(logGroupNamePrefix=self.log_group)['logGroups'][0]
             log_grp = api_call['logGroupName']
             if log_grp:
                 if (log_grp == self.log_group) and (account_id == self.acc_id):
+                    self.validated_data.append([self.acc_id, self.log_group, self.user_profile])
                     return True
             return False
         except IndexError:
@@ -126,5 +132,5 @@ class CloudWatchForwarder:
             print(log)
 
 
-# aws = CloudWatchForwarder()
-# print(aws.validate_account())
+
+# c = CloudWatchForwarder(acc_id='202925831767', log_group='/aws/cloudtrail/console-events', user_profile='default')

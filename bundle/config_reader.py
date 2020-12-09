@@ -15,22 +15,21 @@ class ConfigReader:
         self._config = ConfigParser()
         self._config.read(self.cfg_file)
 
-    def read(self, section, opotion):
+    def read(self, section, option):
         """
         A read method to read key and values
         :return:
         """
-        return self._config.get(section, opotion)
+        return self._config.get(section, option)
 
     def get_profile_names(self):
         """
         Retrieve AWS credential from machine
         :return:
         """
-        path = conf.read('default', 'path')
+        path = self.read('default', 'path')
         self.aws_conf.read(os.path.expanduser(path))
         return self.aws_conf.sections()
 
 
 conf = ConfigReader()
-print(conf.get_profile_names())

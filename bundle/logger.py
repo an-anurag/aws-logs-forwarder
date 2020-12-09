@@ -10,9 +10,9 @@ import os
 import logging
 
 try:
-    from aws_logs_forwarder.config import conf
-except ModuleNotFoundError:
     from bundle.config_reader import conf
+except ModuleNotFoundError:
+    from config_reader import conf
 
 
 class Logger:

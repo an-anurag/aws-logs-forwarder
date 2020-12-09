@@ -1,12 +1,15 @@
 accounts:
   - id: 202925831767
+    profile: default
     log_groups:
       - /aws/cloudtrail/console-events
 
-  - id: 722574999860
-    log_groups:
-      - user-events-log-group
+#  - id: 722574999860
+#    profile: anurag
+#    log_groups:
+#      - user-events-log-group
 
   - id: 202925831767
+    profile: test
     log_groups:
       - /aws/rds/instance/database-1/general

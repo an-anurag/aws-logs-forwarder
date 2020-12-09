@@ -10,9 +10,9 @@ import os
 import geoip2.database
 
 try:
-    from aws_logs_forwarder.config import conf
-except ModuleNotFoundError:
     from bundle.config_reader import conf
+except ModuleNotFoundError:
+    from config_reader import conf
 
 
 class LocationFinder:
@@ -26,11 +26,11 @@ class LocationFinder:
         :param ip_address:
         """
         self.ip_address = ip_address
-        db = conf.read('geoip2-db', 'db')
-        if not os.path.isfile(os.path.abspath(db)):
+        db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), conf.read('geoip2-db', 'db'))
+        if not os.path.isfile(db_path):
             raise FileNotFoundError("GeoLite database is not present")
         else:
-            self._reader = geoip2.database.Reader(os.path.join(db))
+            self._reader = geoip2.database.Reader(os.path.join(db_path))
             self._result = self._reader.city(self.ip_address)
             self._reader.close()
 
