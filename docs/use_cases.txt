@@ -1,0 +1,203 @@
+#########################################################################################################
+1. Service Monitoring
+
+every event with root or iamuser
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>.*)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+#########################################################################################################
+2. S3 Bucket permissions 18
+
+
+CreateBucket
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>CreateBucket)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteBucket
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteBucket)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteBucketCors
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteBucketCors)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteBucketLifecycle
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteBucketLifecycle)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteBucketPolicy
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteBucketPolicy)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteBucketReplication
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteBucketReplication)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteBucketTagging
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteBucketTagging)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketAcl
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketAcl)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketCors
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketCors)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketLifecycle
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketLifecycle)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketLogging
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketLogging)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketNotification
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketNotification)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketPolicy
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketPolicy)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketReplication
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketReplication)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketRequestPayment
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketRequestPayment)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketTagging
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketTagging)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketVersioning
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketVersioning)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutBucketWebsite
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutBucketWebsite)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+#########################################################################################################
+3. Abnormal Login and Login failures 4
+
+Root Login ConsoleLogin
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>ConsoleLogin)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)",.*ConsoleLogin": "(?P<response>Success)".*eventType": "(?P<event_type>\S+)",.*
+
+Root Login failure
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>ConsoleLogin)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)",.*ConsoleLogin": "(?P<response>Failure)".*eventType": "(?P<event_type>\S+)",.*
+
+User login
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>ConsoleLogin)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)",.*ConsoleLogin": "(?P<response>Success)".*eventType": "(?P<event_type>\S+)",.*
+
+User Login failure
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>ConsoleLogin)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)",.*ConsoleLogin": "(?P<response>Failure)".*eventType": "(?P<event_type>\S+)",.*
+
+###############################################################################################################
+4. Admin activity details / Configuration Changes of Privilege Users (AssumeRole). 2 events
+    # Hand edits of conf files REMAIN
+
+Generic event for Root
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>.*)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+AssumeRole
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>AssumeRole)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+###############################################################################################################
+5. Security Groups monitoring 6 events
+
+
+Create a Security Group - CreateSecurityGroup
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>CreateSecurityGroup)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+Delete a Security Group - DeleteSecurityGroup
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteSecurityGroup)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+Add an Outbound Rule - AuthorizeSecurityGroupEgress
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>AuthorizeSecurityGroupEgress)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+Add an Inbound Rule - AuthorizeSecurityGroupIngress
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>AuthorizeSecurityGroupIngress)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+Remove an Outbound Rule - RevokeSecurityGroupEgress
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>RevokeSecurityGroupEgress)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+Remove an Inbound Rule - RevokeSecurityGroupIngress
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",(.*userName": "(?P<user>\S+)",)?.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>RevokeSecurityGroupIngress)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+###############################################################################################################
+6. AWS Config: Monitor Changes to Configuration Files 11 events
+
+DeleteConfigRule
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteConfigRule)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteConfigurationRecorder
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteConfigurationRecorder)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteDeliveryChannel
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteDeliveryChannel)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteEvaluationResults
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteEvaluationResults)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutConfigurationRecorder
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutConfigurationRecorder)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutConfigRule
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutConfigRule)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutDeliveryChannel
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutDeliveryChannel)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+PutEvaluations
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>PutEvaluations)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+StartConfigRulesEvaluation
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>StartConfigRulesEvaluation)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+StartConfigurationRecorder
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>StartConfigurationRecorder)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+StopConfigurationRecorder
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>StopConfigurationRecorder)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+
+
+###############################################################################################################
+7. User added/ Deleted 2 events/ package installation/ process stop
+
+user added to ubuntu
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ -  .*'(?P<event_time>\S+\s+\d+\s+\d+:\d+:\d+)\sip-(?P<source_ip>\S+)\s+(?P<action>useradd).*name=(?P<username>\S+),.*
+Feb 19 19:26:43 AWS-Console Unknown -  Feb 19 09:57:50 ip-10-0-20-226 useradd[10367]: new user: name=cwagent, UID=999, GID=999, home=/home/cwagent, shell=/bin/sh
+Feb 19 19:26:43 AWS-Console Unknown -  Feb 19 14:14:17 ip-10-0-20-226 useradd[12788]: new user: name=test-user, UID=1001, GID=1001, home=/home/test-user, shell=/bin/bash
+
+user deleted to ubuntu
+Feb 19 19:26:43 AWS-Console Unknown -  Feb 19 14:15:31 ip-10-0-20-226 userdel[12805]: delete user 'test-user
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ -  .*'(?P<event_time>\S+\s+\d+\s+\d+:\d+:\d+)\sip-(?P<source_ip>\S+)\s+(?P<action>userdel).*delete user\s+(')?(?P<username>[\w-]+)(')?.*
+
+AMI upgrade
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ -  \{'timestamp': (?P<event_time>\d+).*Commandline:\s(?P<package>.*unattended.*)',.*
+
+package installation
+Feb 19 19:26:43 AWS-Console Unknown -  {'timestamp': 1582120630827, 'message': 'Commandline: apt install python3-django', 'ingestionTime': 1582120636529}
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ -  \{'timestamp': (?P<event_time>\d+).*Install:\s(?P<package>.*)',.*
+
+CreateUser
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>CreateUser)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteUser
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteUser)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+
+###############################################################################################################
+8. Network ACL 6 events
+
+CreateNetworkAcl
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>CreateNetworkAcl)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+CreateNetworkAclEntry
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>CreateNetworkAclEntry)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteNetworkAcl
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteNetworkAcl)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+DeleteNetworkAclEntry
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>DeleteNetworkAclEntry)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+ReplaceNetworkAclEntry
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>ReplaceNetworkAclEntry)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+ReplaceNetworkAclAssociation
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type": "(?P<user_type>Root|IAMUser)",.*eventTime": "(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)", "eventSource": "(?P<service>\S+.\S+.com)", "eventName": "(?P<event_name>ReplaceNetworkAclAssociation)", "awsRegion": "(?P<region>\S+)", "sourceIPAddress": "(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(\S+)?)", ".*eventType": "(?P<event_type>\S+)",.*
+
+##############################################################################################################
+9. Special events
+
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type":"(?P<user_type>Root)"(.*"userName":"(?P<user>[\w-]+)"})?.*eventTime":"(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)","eventSource":"(?P<service>[a-z0-9.]+)","eventName":"(?P<event_name>.*)","awsRegion":"(?P<region>\S+)","sourceIPAddress":"(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?|([a-z0-9.]+)?)",".*eventType":"(?P<event_type>\w+)"(.*"ip_city":"(?P<location>\w+)")?.*
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type":"(?P<user_type>IAMUser)"(.*"userName":"(?P<user>[\w-]+)"})?.*eventTime":"(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)","eventSource":"(?P<service>[a-z0-9.]+)","eventName":"(?P<event_name>.*)","awsRegion":"(?P<region>\S+)","sourceIPAddress":"(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?|([a-z0-9.]+)?)",".*eventType":"(?P<event_type>\w+)"(.*"ip_city":"(?P<location>\w+)")?.*
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type":"(?P<user_type>AssumedRole)"(.*"userName":"(?P<user>[\w-]+)"})?.*eventTime":"(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)","eventSource":"(?P<service>[a-z0-9.]+)","eventName":"(?P<event_name>.*)","awsRegion":"(?P<region>\S+)","sourceIPAddress":"(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?|([a-z0-9.]+)?)",".*eventType":"(?P<event_type>\w+)"(.*"ip_city":"(?P<location>\w+)")?.*
+(?P<syslog_date>\S{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+\S+\s+\S+ - .*type":"(?P<user_type>AWSService)"(.*"userName":"(?P<user>[\w-]+)"})?.*eventTime":"(?P<event_time>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)","eventSource":"(?P<service>[a-z0-9.]+)","eventName":"(?P<event_name>.*)","awsRegion":"(?P<region>\S+)","sourceIPAddress":"(?P<source_ip>(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?|([a-z0-9.]+)?)",".*eventType":"(?P<event_type>\w+)"(.*"ip_city":"(?P<location>\w+)")?.*

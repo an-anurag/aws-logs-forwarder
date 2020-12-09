@@ -1,0 +1,12 @@
+accounts:
+  - id: 202925831767
+    log_groups:
+      - /aws/cloudtrail/console-events
+
+  - id: 722574999860
+    log_groups:
+      - user-events-log-group
+
+  - id: 202925831767
+    log_groups:
+      - /aws/rds/instance/database-1/general
