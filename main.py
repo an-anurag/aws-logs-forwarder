@@ -10,8 +10,8 @@ from bundle.logger import logger
 from bundle.config_reader import conf
 from bundle.yaml_reader import get_confs
 
-HOST = conf.read('prod-logger-input', 'host')
-PORT = conf.read('prod-logger-input', 'port')
+HOST = conf.read('syslog', 'host')
+PORT = conf.read('syslog', 'port')
 
 
 def main():
@@ -30,9 +30,15 @@ def main():
             log_group = acc['log_groups'][0]
 
             # initialize cloudwatch object
-            cloudwatch = CloudWatchForwarder(user_profile=acc_profile, acc_id=acc_id, log_group=log_group)
+            cloudwatch = CloudWatchForwarder(
+                user_profile=acc_profile,
+                acc_id=acc_id,
+                log_group=log_group,
+                host=HOST,
+                port=PORT,
+            )
             # one thread for each cloudwatch object
-            thread = Thread(target=cloudwatch.run, args=(HOST, PORT))
+            thread = Thread(target=cloudwatch.run)
             thread.start()
 
     except socket.timeout as err:
@@ -43,6 +49,8 @@ def main():
         logger.exception("Connection error, trying again", err)
         time.sleep(60)
         return main()
+    except IOError as err:
+        logger.exception('No storage space left on sensor')
     except Exception as err:
         logger.exception(err)
 

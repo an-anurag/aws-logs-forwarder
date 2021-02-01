@@ -3,30 +3,33 @@
 
 # imports
 import re
+import os
 import socket
 import time
-from typing import Generator
+import datetime
+import sys
+
+import pytz
 
 # third party imports
 import boto3
 from geoip2.errors import AddressNotFoundError
-from bundle.yaml_reader import get_confs
 
 try:
-    from bundle.config_reader import conf
-    from bundle.location_finder import LocationFinder
-    from bundle.logger import logger
-except ModuleNotFoundError:
     from config_reader import conf
     from location_finder import LocationFinder
     from logger import logger
+except ImportError:
+    from bundle.config_reader import conf
+    from bundle.location_finder import LocationFinder
+    from bundle.logger import logger
 
 
 class CloudWatchForwarder:
     """
     A custom implemented AWS API
     """
-    def __init__(self, acc_id=None, log_group=None, user_profile=None):
+    def __init__(self, acc_id=None, log_group=None, user_profile=None, host=None, port=None):
         """
         Constructor
         """
@@ -43,6 +46,11 @@ class CloudWatchForwarder:
             'logStreamName': None,
         }
         self.validated_data = []
+        self.host = host
+        self.port = port
+        self.log_dir = os.path.join('/var/log/')
+        self.log_path = None
+        self.timezone = pytz.timezone(conf.read('time', 'timezone'))
 
     def get_account_id(self):
         """
@@ -66,7 +74,7 @@ class CloudWatchForwarder:
         except IndexError:
             logger.exception("Invalid account id or log group", exc_info=False)
 
-    def get_log_streams(self) -> list:
+    def get_log_streams(self):
         """
         Logic to fetch all log stream in a given log group
         :return:
@@ -77,23 +85,24 @@ class CloudWatchForwarder:
             stream_batch.append(stream['logStreamName'])
         return stream_batch
 
-    def get_logs(self, streams) -> Generator[dict, None, None]:
+    def get_logs(self, streams):
         """
         A logic to continuously poll each log stream to fetch logs in  batch
         :return:
         """
-
         while True:
             for stream in streams:
                 self.kwargs['logStreamName'] = stream
                 if self.tokens.get(stream):
                     self.kwargs['nextToken'] = self.tokens[stream]
                 resp = self.cloudwatch.get_log_events(**self.kwargs)
-                yield from resp['events']
+                # yield from resp['events']
+                for log in resp['events']:
+                    yield log
                 self.tokens[stream] = str(resp['nextForwardToken'])
                 time.sleep(15)
 
-    def forward(self, host: str, port: int, log: str) -> None:
+    def forward(self, log):
         """
         A method to forward logs to graylog input
         :param host:
@@ -101,10 +110,13 @@ class CloudWatchForwarder:
         :param log:
         :return:
         """
-        self._socket.sendto(bytes(log, encoding='utf-8'), (host, int(port)))
+        if sys.version_info.major == '2':
+            self._socket.sendto(log, (self.host, int(self.port)))
+        else:
+            self._socket.sendto(bytes(log), (self.host, int(self.port)))
 
     @staticmethod
-    def add_location(log: str) -> str:
+    def add_location(log):
         """
         A method to return ip geolocation if ip present in log
         :param log:
@@ -118,16 +130,63 @@ class CloudWatchForwarder:
                 city = LocationFinder(ip).get_city()
                 lat = LocationFinder(ip).get_latitude()
                 long = LocationFinder(ip).get_longitude()
-                location = r''', 'location': {"ip_city":"%s","latitude":"%s","longitude":"%s"}''' % (city, lat, long)
+                location = r''',"location":{"ip_city":"%s","latitude":"%s","longitude":"%s"}''' % (city, lat, long)
                 return log + location
             return log
         except AddressNotFoundError:
             return log
 
-    def run(self, host, port):
-        streams = self.get_log_streams()
-        for log in self.get_logs(streams=streams):
-            log = self.add_location(str(log))
-            self.forward(host, port, log)
-            print(log)
+    @staticmethod
+    def add_keyword(log, log_group_name):
+        """
+        Method to add keyword in every log according to platform
+        """
 
+        if 'windows-ami' in log_group_name.lower():
+            return 'windows-ami - ' + log
+
+        if 'ubuntu-ami' in log_group_name.lower():
+            return 'ubuntu-ami - ' + log
+
+        if 'centos-ami' in log_group_name.lower():
+            return 'centos-ami - ' + log
+
+        if 'aws-console' in log_group_name.lower():
+            return 'aws-console - ' + log
+        
+    def get_log_filename(self, log_group_name):
+
+        log_dir = self.log_dir
+
+        if 'windows-ami' in log_group_name.lower():
+            self.log_path = log_dir + 'windows-ami.log'
+            return self.log_path
+
+        if 'ubuntu-ami' in log_group_name.lower():
+            self.log_path = log_dir + 'ubuntu-ami.log'
+            return self.log_path
+
+        if 'centos-ami' in log_group_name.lower():
+            self.log_path = log_dir + 'centos-ami.log'
+            return self.log_path
+
+        if 'aws-console' in log_group_name.lower():
+            self.log_path = log_dir + 'aws-console.log'
+            return self.log_path
+
+    def add_timestamp(self, log):
+        now = datetime.datetime.now(tz=self.timezone)
+        clean = now.strftime('%a %d %H:%M:%S')
+        return clean + " " + log
+
+    def run(self):
+        self.get_log_filename(self.log_group)
+        streams = self.get_log_streams()
+        with open(self.log_path, 'a+') as log_file:
+            for log in self.get_logs(streams=streams):
+                log = self.add_location(str(log))
+                log = self.add_keyword(log, self.log_group)
+                log = self.add_timestamp(log)
+                self.forward(log)
+                log_file.write('%s\n' % str(log))
+                print(log)

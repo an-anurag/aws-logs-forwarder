@@ -1,15 +1,15 @@
 accounts:
-  - id: 202925831767
-    profile: default
+  - id: aws_account_id
+    profile: cli_profile_from_credential_file
     log_groups:
-      - /aws/cloudtrail/console-events
+      - console-events-log-group
 
-#  - id: 722574999860
-#    profile: anurag
-#    log_groups:
-#      - user-events-log-group
-
-  - id: 202925831767
-    profile: test
+  - id: aws_account_id
+    profile: cli_profile_from_credential_file
     log_groups:
-      - /aws/rds/instance/database-1/general
+      - user-events-log-group
+
+  - id: aws_account_id
+    profile: cli_profile_from_credential_file
+    log_groups:
+      - rds-events-log-group

@@ -2,7 +2,12 @@
 """A setup file reader for the aws_console module"""
 
 import os
-from configparser import ConfigParser
+import sys
+
+if sys.version_info.major == 2:
+    from ConfigParser import ConfigParser
+else:
+    from configparser import ConfigParser
 
 
 class ConfigReader:

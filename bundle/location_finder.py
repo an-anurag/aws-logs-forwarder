@@ -11,7 +11,7 @@ import geoip2.database
 
 try:
     from bundle.config_reader import conf
-except ModuleNotFoundError:
+except ImportError:
     from config_reader import conf
 
 
